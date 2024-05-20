@@ -1,0 +1,8 @@
+{
+  "name": "nlp-to-sql",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Alexander-Softin/nlp-to-sql.git",
+  "author": "Alexander Softin <stom-2002@mail.ru>",
+  "license": "MIT"
+}
