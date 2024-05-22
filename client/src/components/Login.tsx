@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { AuthContext } from '../App';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
+  const { setIsAuthenticated } = useContext(AuthContext);
 
   const handleLogin = async () => {
     const response = await fetch('http://localhost:3001/login', {
@@ -16,16 +17,16 @@ const Login: React.FC = () => {
 
     const data = await response.json();
     if (response.ok) {
-      setMessage(data.message);
       localStorage.setItem('token', data.token);
+      setIsAuthenticated(true);
     } else {
-      setMessage(data.error);
+      alert(data.error);
     }
   };
 
   return (
     <div>
-      <h1>Войти</h1>
+      <h1>Вход</h1>
       <input
         type="email"
         placeholder="Email"
@@ -39,7 +40,6 @@ const Login: React.FC = () => {
         onChange={(e) => setPassword(e.target.value)}
       />
       <button onClick={handleLogin}>Войти</button>
-      <p>{message}</p>
     </div>
   );
 };

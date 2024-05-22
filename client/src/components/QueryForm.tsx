@@ -1,15 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { AuthContext } from '../App';
 
 const QueryForm: React.FC = () => {
   const [naturalLanguageQuery, setNaturalLanguageQuery] = useState('');
   const [sqlQuery, setSqlQuery] = useState('');
+  const [message, setMessage] = useState('');
+  const [requestCount, setRequestCount] = useState(0);
+
+  const { isAuthenticated } = useContext(AuthContext);
+  const maxRequests = isAuthenticated ? 3 : 1;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Здесь будет логика отправки запроса на сервер для преобразования
-    // естественного языка в SQL.
-    // Пока установим пример результата.
-    setSqlQuery(`SELECT * FROM table WHERE query = '${naturalLanguageQuery}'`);
+
+    if (requestCount >= maxRequests) {
+      setMessage(`Вы достигли максимального количества запросов: ${maxRequests}`);
+      return;
+    }
+
+    const token = localStorage.getItem('token');
+    const response = await fetch('http://localhost:3001/query', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify({ query: naturalLanguageQuery }),
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+      setSqlQuery(data.sqlQuery);
+      setRequestCount(requestCount + 1);
+      setMessage('');
+    } else {
+      setMessage(data.error);
+    }
   };
 
   return (
@@ -32,6 +58,7 @@ const QueryForm: React.FC = () => {
           />
         </div>
         <button type="submit">Отправить</button>
+        <p>{message}</p>
       </form>
     </div>
   );
