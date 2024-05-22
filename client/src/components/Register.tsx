@@ -4,8 +4,17 @@ const Register: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
 
   const handleRegister = async () => {
+    // Проверка формата email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setError('Неправильный формат электронной почты');
+      return;
+    }
+
+    // Остальная логика регистрации
     const response = await fetch('http://localhost:3001/register', {
       method: 'POST',
       headers: {
@@ -38,6 +47,7 @@ const Register: React.FC = () => {
         onChange={(e) => setPassword(e.target.value)}
       />
       <button onClick={handleRegister}>Зарегистрироваться</button>
+      <p>{error}</p>
       <p>{message}</p>
     </div>
   );

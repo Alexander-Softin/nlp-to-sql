@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Register from './Register';
 import Login from './components/Login';
 import Header from './components/Header';
+import QueryForm from './components/QueryForm';
 
 const App: React.FC = () => {
   return (
@@ -11,7 +12,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/" element={<h1>Добро пожаловать на наш сайт!</h1>} />
+        <Route path="/" element={<QueryForm />} />
       </Routes>
     </Router>
   );
