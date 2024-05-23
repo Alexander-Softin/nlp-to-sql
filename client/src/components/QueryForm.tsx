@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { AuthContext } from '../App';
 
 const QueryForm: React.FC = () => {
@@ -10,6 +10,13 @@ const QueryForm: React.FC = () => {
   const { isAuthenticated } = useContext(AuthContext);
   const maxRequests = isAuthenticated ? 3 : 1;
 
+  useEffect(() => {
+    const storedRequestCount = localStorage.getItem('requestCount');
+    if (storedRequestCount) {
+      setRequestCount(parseInt(storedRequestCount));
+    }
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -19,12 +26,15 @@ const QueryForm: React.FC = () => {
     }
 
     const token = localStorage.getItem('token');
-    const response = await fetch('http://localhost:3001/query', {
+    const headers: HeadersInit = { 'Content-Type': 'application/json' };
+    if (isAuthenticated && token) {
+      headers['Authorization'] = `Bearer ${token}`;
+    }
+
+    const url = isAuthenticated ? 'http://localhost:3001/query' : 'http://localhost:3001/query-unauthed';
+    const response = await fetch(url, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
-      },
+      headers: headers,
       body: JSON.stringify({ query: naturalLanguageQuery }),
     });
 
@@ -32,6 +42,7 @@ const QueryForm: React.FC = () => {
     if (response.ok) {
       setSqlQuery(data.sqlQuery);
       setRequestCount(requestCount + 1);
+      localStorage.setItem('requestCount', String(requestCount + 1));
       setMessage('');
     } else {
       setMessage(data.error);
