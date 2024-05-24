@@ -1,29 +1,15 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { AuthContext } from '../App';
 
 const QueryForm: React.FC = () => {
   const [naturalLanguageQuery, setNaturalLanguageQuery] = useState('');
   const [sqlQuery, setSqlQuery] = useState('');
   const [message, setMessage] = useState('');
-  const [requestCount, setRequestCount] = useState(0);
 
   const { isAuthenticated } = useContext(AuthContext);
-  const maxRequests = isAuthenticated ? 3 : 1;
-
-  useEffect(() => {
-    const storedRequestCount = localStorage.getItem('requestCount');
-    if (storedRequestCount) {
-      setRequestCount(parseInt(storedRequestCount));
-    }
-  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (requestCount >= maxRequests) {
-      setMessage(`Вы достигли максимального количества запросов: ${maxRequests}`);
-      return;
-    }
 
     const token = localStorage.getItem('token');
     const headers: HeadersInit = { 'Content-Type': 'application/json' };
@@ -41,11 +27,17 @@ const QueryForm: React.FC = () => {
     const data = await response.json();
     if (response.ok) {
       setSqlQuery(data.sqlQuery);
-      setRequestCount(requestCount + 1);
-      localStorage.setItem('requestCount', String(requestCount + 1));
-      setMessage('');
+      setMessage(''); // Очищаем сообщение об ошибке, если запрос успешен
     } else {
-      setMessage(data.error);
+      if (data.error) {
+        let errorMessage = data.error;
+        if (data.timeLeft) {
+          errorMessage += ` ${data.timeLeft}`;
+        }
+        setMessage(errorMessage); // Выводим сообщение об ошибке, если оно есть
+      } else {
+        setMessage('Произошла ошибка'); // Если сообщение об ошибке от сервера отсутствует, выводим общее сообщение
+      }
     }
   };
 

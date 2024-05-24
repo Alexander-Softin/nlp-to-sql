@@ -12,8 +12,8 @@ model User {
   email       String       @unique
   password    String
   requests    Int          @default(0)
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
+  createdAt   DateTime     @default(now()) @db.Timestamptz(6)
+  updatedAt   DateTime     @updatedAt @db.Timestamptz(6)
   sessions    Session[]
   requestLogs RequestLog[]
 }
@@ -22,7 +22,7 @@ model Session {
   id        Int      @id @default(autoincrement())
   user      User     @relation(fields: [userId], references: [id])
   userId    Int
-  createdAt DateTime @default(now())
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
 }
 
 model RequestLog {
@@ -30,5 +30,5 @@ model RequestLog {
   user      User?    @relation(fields: [userId], references: [id])
   userId    Int?
   ip        String?
-  createdAt DateTime @default(now())
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
 }
