@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { AuthContext } from '../App';
+import '../css/QueryForm.css';
 
 const QueryForm: React.FC = () => {
   const [naturalLanguageQuery, setNaturalLanguageQuery] = useState('');
@@ -42,26 +43,23 @@ const QueryForm: React.FC = () => {
   };
 
   return (
-    <div style={{ textAlign: 'center', marginTop: '20px' }}>
+    <div className="container">
+      <h1>SQL Query Generator</h1>
       <form onSubmit={handleSubmit}>
-        <div>
-          <textarea
-            placeholder="Введите запрос на естественном языке"
-            value={naturalLanguageQuery}
-            onChange={(e) => setNaturalLanguageQuery(e.target.value)}
-            style={{ width: '80%', height: '100px', marginBottom: '20px' }}
-          />
-        </div>
-        <div>
-          <textarea
-            placeholder="SQL запрос"
-            value={sqlQuery}
-            readOnly
-            style={{ width: '80%', height: '100px', marginBottom: '20px' }}
-          />
-        </div>
+        <h2>Enter your natural language query:</h2>
+        <textarea
+          placeholder="Введите запрос на естественном языке"
+          value={naturalLanguageQuery}
+          onChange={(e) => setNaturalLanguageQuery(e.target.value)}
+        />
+        <h2>Generated SQL query:</h2>
+        <textarea
+          placeholder="SQL запрос"
+          value={sqlQuery}
+          readOnly
+        />
         <button type="submit">Отправить</button>
-        <p>{message}</p>
+        {message && <p className="message">{message}</p>}
       </form>
     </div>
   );

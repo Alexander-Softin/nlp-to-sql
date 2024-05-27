@@ -1,0 +1,107 @@
+{
+  "Tables": [
+    {
+      "TableName": "Person",
+      "Description": "Содержит информацию о людях",
+      "Columns": [
+        {"Name": "ID", "Caption": "Код", "Type": "INTEGER"},
+        {"Name": "Name", "Caption": "Имя", "Type": "STRING"},
+        {"Name": "Age", "Caption": "Возраст", "Type": "INTEGER"},
+        {"Name": "Email", "Caption": "Электронная почта", "Type": "STRING"},
+        {"Name": "CreatedAt", "Caption": "Дата создания", "Type": "DATETIME"},
+        {"Name": "City", "Caption": "Город", "Type": "STRING"}
+      ]
+    },
+    {
+      "TableName": "Product",
+      "Description": "Содержит информацию о продуктах",
+      "Columns": [
+        {"Name": "ID", "Caption": "Код продукта", "Type": "INTEGER"},
+        {"Name": "Name", "Caption": "Название продукта", "Type": "STRING"},
+        {"Name": "Category", "Caption": "Категория", "Type": "STRING"},
+        {"Name": "Price", "Caption": "Цена", "Type": "FLOAT"},
+        {"Name": "Stock", "Caption": "Количество на складе", "Type": "INTEGER"}
+      ]
+    },
+    {
+      "TableName": "Order",
+      "Description": "Содержит информацию о заказах",
+      "Columns": [
+        {"Name": "ID", "Caption": "Код заказа", "Type": "INTEGER"},
+        {"Name": "CustomerID", "Caption": "Код клиента", "Type": "INTEGER"},
+        {"Name": "OrderDate", "Caption": "Дата заказа", "Type": "DATETIME"},
+        {"Name": "TotalAmount", "Caption": "Общая сумма", "Type": "FLOAT"}
+      ]
+    },
+    {
+      "TableName": "Employee",
+      "Description": "Содержит информацию о сотрудниках",
+      "Columns": [
+        {"Name": "ID", "Caption": "Код сотрудника", "Type": "INTEGER"},
+        {"Name": "FirstName", "Caption": "Имя", "Type": "STRING"},
+        {"Name": "LastName", "Caption": "Фамилия", "Type": "STRING"},
+        {"Name": "Position", "Caption": "Должность", "Type": "STRING"},
+        {"Name": "Salary", "Caption": "Зарплата", "Type": "FLOAT"},
+        {"Name": "HireDate", "Caption": "Дата найма", "Type": "DATETIME"},
+        {"Name": "DepartmentID", "Caption": "Код департамента", "Type": "INTEGER"}
+      ]
+    },
+    {
+      "TableName": "Department",
+      "Description": "Содержит информацию о департаментах",
+      "Columns": [
+        {"Name": "ID", "Caption": "Код департамента", "Type": "INTEGER"},
+        {"Name": "Name", "Caption": "Название департамента", "Type": "STRING"},
+        {"Name": "ManagerID", "Caption": "Код менеджера", "Type": "INTEGER"},
+        {"Name": "Location", "Caption": "Местоположение", "Type": "STRING"}
+      ]
+    },
+    {
+      "TableName": "Customer",
+      "Description": "Содержит информацию о клиентах",
+      "Columns": [
+        {"Name": "ID", "Caption": "Код клиента", "Type": "INTEGER"},
+        {"Name": "FirstName", "Caption": "Имя", "Type": "STRING"},
+        {"Name": "LastName", "Caption": "Фамилия", "Type": "STRING"},
+        {"Name": "Email", "Caption": "Электронная почта", "Type": "STRING"},
+        {"Name": "Phone", "Caption": "Телефон", "Type": "STRING"},
+        {"Name": "Address", "Caption": "Адрес", "Type": "STRING"},
+        {"Name": "City", "Caption": "Город", "Type": "STRING"},
+        {"Name": "Country", "Caption": "Страна", "Type": "STRING"}
+      ]
+    },
+    {
+      "TableName": "Invoice",
+      "Description": "Содержит информацию о счетах",
+      "Columns": [
+        {"Name": "ID", "Caption": "Код счета", "Type": "INTEGER"},
+        {"Name": "OrderID", "Caption": "Код заказа", "Type": "INTEGER"},
+        {"Name": "InvoiceDate", "Caption": "Дата счета", "Type": "DATETIME"},
+        {"Name": "Amount", "Caption": "Сумма", "Type": "FLOAT"}
+      ]
+    },
+    {
+      "TableName": "Supplier",
+      "Description": "Содержит информацию о поставщиках",
+      "Columns": [
+        {"Name": "ID", "Caption": "Код поставщика", "Type": "INTEGER"},
+        {"Name": "Name", "Caption": "Название", "Type": "STRING"},
+        {"Name": "ContactName", "Caption": "Контактное лицо", "Type": "STRING"},
+        {"Name": "Phone", "Caption": "Телефон", "Type": "STRING"},
+        {"Name": "Email", "Caption": "Электронная почта", "Type": "STRING"},
+        {"Name": "Address", "Caption": "Адрес", "Type": "STRING"},
+        {"Name": "City", "Caption": "Город", "Type": "STRING"},
+        {"Name": "Country", "Caption": "Страна", "Type": "STRING"}
+      ]
+    },
+    {
+      "TableName": "Shipper",
+      "Description": "Содержит информацию о перевозчиках",
+      "Columns": [
+        {"Name": "ID", "Caption": "Код перевозчика", "Type": "INTEGER"},
+        {"Name": "Name", "Caption": "Название", "Type": "STRING"},
+        {"Name": "Phone", "Caption": "Телефон", "Type": "STRING"}
+      ]
+    }
+  ]
+}
