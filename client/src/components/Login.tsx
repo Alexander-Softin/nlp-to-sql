@@ -1,10 +1,12 @@
 import React, { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../App';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { setIsAuthenticated } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     const response = await fetch('http://localhost:3001/login', {
@@ -18,7 +20,10 @@ const Login: React.FC = () => {
     const data = await response.json();
     if (response.ok) {
       localStorage.setItem('token', data.token);
+      localStorage.setItem('email', email);
       setIsAuthenticated(true);
+      navigate('/');
+      window.location.reload();  // Добавляем перезагрузку страницы
     } else {
       alert(data.error);
     }
