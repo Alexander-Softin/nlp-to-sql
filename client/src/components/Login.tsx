@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../App';
+import '../css/AuthForm.css';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -23,14 +24,14 @@ const Login: React.FC = () => {
       localStorage.setItem('email', email);
       setIsAuthenticated(true);
       navigate('/');
-      window.location.reload();  // Добавляем перезагрузку страницы
+      window.location.reload(); // Добавляем перезагрузку страницы
     } else {
       alert(data.error);
     }
   };
 
   return (
-    <div>
+    <div className="auth-form-container">
       <h1>Вход</h1>
       <input
         type="email"

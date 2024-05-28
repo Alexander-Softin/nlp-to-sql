@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../css/AuthForm.css';
 
 const Register: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -26,13 +27,15 @@ const Register: React.FC = () => {
     const data = await response.json();
     if (response.ok) {
       setMessage(data.message);
+      setError('');
     } else {
-      setMessage(data.error);
+      setMessage('');
+      setError(data.error);
     }
   };
 
   return (
-    <div>
+    <div className="auth-form-container">
       <h1>Регистрация</h1>
       <input
         type="email"
@@ -47,8 +50,8 @@ const Register: React.FC = () => {
         onChange={(e) => setPassword(e.target.value)}
       />
       <button onClick={handleRegister}>Зарегистрироваться</button>
-      <p>{error}</p>
-      <p>{message}</p>
+      {error && <p className="error-message">{error}</p>}
+      {message && <p className="success-message">{message}</p>}
     </div>
   );
 };

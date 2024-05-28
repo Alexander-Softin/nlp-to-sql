@@ -1,6 +1,6 @@
 import React, { useState, createContext, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Register from './Register';
+import Register from './components/Register';
 import Login from './components/Login';
 import Header from './components/Header';
 import QueryForm from './components/QueryForm';

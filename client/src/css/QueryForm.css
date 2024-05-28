@@ -77,6 +77,7 @@ button.generate-button:disabled {
 
 .message {
   margin-top: 20px;
+  color: red;
   font-weight: bold;
 }
 
@@ -107,25 +108,14 @@ button.generate-button:disabled {
   100% { transform: rotate(360deg); }
 }
 
-.alert {
-  width: 80%;
-  padding: 15px;
-  margin: 10px 0;
-  border: 1px solid transparent;
-  border-radius: 4px;
-}
-
-.alert-danger {
-  color: #a94442;
-  background-color: #f2dede;
-  border-color: #ebccd1;
-}
-
-h1.title {
-  color: #fff;
-  font-size: 36px;
+h1 {
+  color: #333;
+  font-size: 24px;
   margin-bottom: 20px;
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 2px;
+}
+
+h2 {
+  color: #555;
+  font-size: 20px;
+  margin-bottom: 10px;
 }
