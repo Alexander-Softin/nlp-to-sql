@@ -28,6 +28,7 @@ const Header: React.FC<HeaderProps> = ({ email, setIsAuthenticated }) => {
             <>
               <Nav.Link disabled>Привет, {email}</Nav.Link>
               <Nav.Link href="/purchase-key">Купить ключ</Nav.Link>
+              <Nav.Link href="/history">История запросов</Nav.Link>
               <Nav.Link onClick={handleLogout}>Выйти</Nav.Link>
             </>
           ) : (
