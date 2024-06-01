@@ -7,7 +7,7 @@ from transformers import FSMTForConditionalGeneration, FSMTTokenizer, AutoTokeni
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
 # Модель для перевода русского текста на английский
-CKPT_translator = "facebook/wmt19-ru-en"
+CKPT_translator = os.path.join(script_dir, "model/wmt19-ru-en")
 tokenizer_translator = FSMTTokenizer.from_pretrained(CKPT_translator)
 model_translator = FSMTForConditionalGeneration.from_pretrained(
     CKPT_translator)
