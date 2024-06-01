@@ -6,6 +6,8 @@ import '../css/AuthForm.css';
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [superUserKey, setSuperUserKey] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const { setIsAuthenticated } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -15,7 +17,7 @@ const Login: React.FC = () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email, password, superUserKey }),
     });
 
     const data = await response.json();
@@ -26,13 +28,14 @@ const Login: React.FC = () => {
       navigate('/');
       window.location.reload(); // Добавляем перезагрузку страницы
     } else {
-      alert(data.error);
+      setErrorMessage(data.error);
     }
   };
 
   return (
     <div className="auth-form-container">
       <h1>Вход</h1>
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
       <input
         type="email"
         placeholder="Email"
@@ -44,6 +47,12 @@ const Login: React.FC = () => {
         placeholder="Пароль"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
+      />
+      <input
+        type="text"
+        placeholder="Суперпользовательский ключ (необязательно)"
+        value={superUserKey}
+        onChange={(e) => setSuperUserKey(e.target.value)}
       />
       <button onClick={handleLogin}>Войти</button>
     </div>

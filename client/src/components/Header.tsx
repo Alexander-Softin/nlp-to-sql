@@ -15,7 +15,7 @@ const Header: React.FC<HeaderProps> = ({ email, setIsAuthenticated }) => {
     localStorage.removeItem('email');
     setIsAuthenticated(false);
     navigate('/');
-    window.location.reload();  // Добавляем перезагрузку страницы
+    window.location.reload(); // Добавляем перезагрузку страницы
   };
 
   return (
@@ -27,6 +27,7 @@ const Header: React.FC<HeaderProps> = ({ email, setIsAuthenticated }) => {
           {email ? (
             <>
               <Nav.Link disabled>Привет, {email}</Nav.Link>
+              <Nav.Link href="/purchase-key">Купить ключ</Nav.Link>
               <Nav.Link onClick={handleLogout}>Выйти</Nav.Link>
             </>
           ) : (

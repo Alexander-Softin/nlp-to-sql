@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "RequestLog" ADD COLUMN     "counted" BOOLEAN NOT NULL DEFAULT false,
+ALTER COLUMN "query" DROP NOT NULL,
+ALTER COLUMN "response" DROP NOT NULL;

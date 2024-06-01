@@ -4,8 +4,11 @@ import Register from './components/Register';
 import Login from './components/Login';
 import Header from './components/Header';
 import QueryForm from './components/QueryForm';
+import QueryHistory from './components/QueryHistory';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/App.css';
+import PurchaseKey from './components/PurchaseKey';
+import Footer from './components/Footer';
 
 const AuthContext = createContext({ isAuthenticated: false, setIsAuthenticated: (auth: boolean) => {} });
 
@@ -32,9 +35,12 @@ const App: React.FC = () => {
             <Routes>
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/history" element={<QueryHistory />} />
+              <Route path="/purchase-key" element={<PurchaseKey />} />
               <Route path="/" element={<QueryForm />} />
             </Routes>
           </div>
+          <Footer />
         </Router>
       </div>
     </AuthContext.Provider>
