@@ -108,7 +108,6 @@ router.post('/login', async (req: Request, res: Response) => {
 
 
 
-// Обновление маршрута /query
 router.post('/query', authenticateToken, checkRequestLimit, async (req, res) => {
   const { query } = req.body;
   const { userId, isSuperUser } = req.user as JwtPayload;
@@ -128,7 +127,6 @@ router.post('/query', authenticateToken, checkRequestLimit, async (req, res) => 
       return res.status(500).json({ error: 'Failed to generate SQL query' });
     }
 
-    // Записываем запрос и ответ в базу данных для всех пользователей
     await prisma.requestLog.create({
       data: {
         userId: userId,
@@ -182,13 +180,16 @@ router.post('/query-unauthed', checkUnauthenticatedRequestLimit, async (req: Req
 
 // Маршрут для получения истории запросов
 router.get('/history', authenticateToken, async (req, res) => {
-  const { userId } = req.user as JwtPayload;
+  try{const { userId } = req.user as JwtPayload;
   const requestLogs = await prisma.requestLog.findMany({
     where: { userId },
     orderBy: { createdAt: 'desc' },
   });
 
-  res.json({ requestLogs });
+  res.json({ requestLogs }); } catch (error) {
+    console.error('Ошибка при загрузке истории запросов:', error);
+    res.status(500).json({ error: 'Произошла ошибка при показе истории запросов.' });
+  }
 });
 
 router.delete('/history', authenticateToken, async (req: Request, res: Response) => {
