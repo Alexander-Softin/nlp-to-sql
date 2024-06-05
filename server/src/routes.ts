@@ -48,8 +48,8 @@ router.post('/register', async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
   // Проверка на допустимость почты
-  if (!email.endsWith('@mail.com')) {
-    return res.status(400).json({ error: 'Email должен заканчиваться на @mail.com' });
+  if (!email.endsWith('@mail.ru')) {
+    return res.status(400).json({ error: 'Email должен заканчиваться на @mail.ru' });
   }
 
   // Хеширование пароля
@@ -111,68 +111,73 @@ router.post('/login', async (req: Request, res: Response) => {
 router.post('/query', authenticateToken, checkRequestLimit, async (req, res) => {
   const { query } = req.body;
   const { userId, isSuperUser } = req.user as JwtPayload;
-  const pythonProcess = spawn('python', ['./src/python/translate.py', query]);
 
-  let dataString = '';
-  pythonProcess.stdout.on('data', function (data) {
-    dataString += data.toString();
-  });
+  try {
+    const dataString = await executePythonScript(query);
 
-  pythonProcess.stderr.on('data', function (data) {
-    console.error(`stderr: ${data}`);
-  });
-
-  pythonProcess.on('close', async function (code) {
-    if (code !== 0) {
-      return res.status(500).json({ error: 'Failed to generate SQL query' });
+    if (!isSuperUser) {
+      await prisma.requestLog.create({
+        data: {
+          userId: userId,
+          query: query,
+          response: dataString,
+        },
+      });
     }
+
+    res.json({ sqlQuery: dataString });
+  } catch (error) {
+    console.error('Error processing query:', error);
+    res.status(500).json({ error: 'Failed to generate SQL query' });
+  }
+});
+
+router.post('/query-unauthed', checkUnauthenticatedRequestLimit, async (req, res) => {
+  const { query } = req.body;
+
+  try {
+    const dataString = await executePythonScript(query);
 
     await prisma.requestLog.create({
       data: {
-        userId: userId,
+        ip: req.ip,
         query: query,
         response: dataString,
       },
     });
 
     res.json({ sqlQuery: dataString });
-  });
+  } catch (error) {
+    console.error('Error processing query:', error);
+    res.status(500).json({ error: 'Failed to generate SQL query' });
+  }
 });
 
+async function executePythonScript(query: string): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const pythonProcess = spawn('python', ['./src/python/translate.py', query]);
+    let dataString = '';
+    let errorString = '';
 
-
-
-// Маршрут для отправки запроса неавторизованными пользователями
-router.post('/query-unauthed', checkUnauthenticatedRequestLimit, async (req: Request, res: Response) => {
-  const { query } = req.body;
-  const pythonProcess = spawn('python', ['./src/python/translate.py', query]);
-  let sqlQuery = '';
-
-  pythonProcess.stdout.on('data', (data) => {
-    sqlQuery += data.toString();
-  });
-
-  pythonProcess.on('close', async (code) => {
-    if (code !== 0) {
-      return res.status(500).json({ error: 'Failed to generate SQL query' });
-    }
-
-    // Записываем запрос и ответ в базу данных
-    await prisma.requestLog.create({
-      data: {
-        ip: req.ip,
-        query: query,
-        response: sqlQuery,
-      },
+    pythonProcess.stdout.on('data', (data) => {
+      dataString += data.toString();
     });
 
-    res.json({ sqlQuery });
-  });
+    pythonProcess.stderr.on('data', (data) => {
+      errorString += data.toString();
+      console.error(`stderr: ${data}`);
+    });
 
-  pythonProcess.stderr.on('data', (data) => {
-    console.error(`stderr: ${data}`);
+    pythonProcess.on('close', (code) => {
+      if (code !== 0) {
+        console.error(`Python script exited with code ${code}`);
+        reject(new Error(`Failed to generate SQL query. Error: ${errorString}`));
+      } else {
+        resolve(dataString);
+      }
+    });
   });
-});
+}
 
 
 

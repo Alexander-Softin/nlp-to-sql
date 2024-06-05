@@ -19,35 +19,32 @@ const QueryForm: React.FC = () => {
     setLoading(true);
     setMessage('');
 
-    const token = localStorage.getItem('token');
-    const headers: HeadersInit = { 'Content-Type': 'application/json' };
-    if (isAuthenticated && token) {
-      headers['Authorization'] = `Bearer ${token}`;
-    }
-
-    const url = isAuthenticated ? 'http://localhost:3001/query' : 'http://localhost:3001/query-unauthed';
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: headers,
-      body: JSON.stringify({ query: naturalLanguageQuery }),
-    });
-
-    const data = await response.json();
-    if (response.ok) {
-      setSqlQuery(data.sqlQuery);
-      setMessage('');
-    } else {
-      if (data.error) {
-        let errorMessage = data.error;
-        if (data.timeLeft) {
-          errorMessage += ` ${data.timeLeft}`;
-        }
-        setMessage(errorMessage);
-      } else {
-        setMessage('Произошла ошибка');
+    try {
+      const token = localStorage.getItem('token');
+      const headers: HeadersInit = { 'Content-Type': 'application/json' };
+      if (isAuthenticated && token) {
+        headers['Authorization'] = `Bearer ${token}`;
       }
+
+      const url = isAuthenticated ? 'http://localhost:3001/query' : 'http://localhost:3001/query-unauthed';
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify({ query: naturalLanguageQuery }),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        setSqlQuery(data.sqlQuery);
+        setMessage('');
+      } else {
+        setMessage(data.error + ` ${data.timeLeft}`|| 'Произошла ошибка');
+      }
+    } catch (error) {
+      setMessage('Произошла ошибка');
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   return (

@@ -25,7 +25,7 @@ const PurchaseKey: React.FC = () => {
     <div className="auth-form-container">
       <h1>Покупка ключа суперпользователя</h1>
       <p>Здесь можно приобрести ключ суперпользователя для безлимитного использования запросов.</p>
-      <button className="btn btn-success" onClick={handlePurchase}>Купить ключ за $9.99</button>
+      <button className="btn btn-success" onClick={handlePurchase}>Купить ключ за $2.99</button>
       {superUserKey && (
         <div className="mt-3">
           <p>Ваш ключ суперпользователя:</p>

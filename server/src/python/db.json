@@ -7,9 +7,12 @@
         {"Name": "ID", "Caption": "Код", "Type": "INTEGER"},
         {"Name": "Name", "Caption": "Имя", "Type": "STRING"},
         {"Name": "Age", "Caption": "Возраст", "Type": "INTEGER"},
+        {"Name": "Gender", "Caption": "Пол", "Type": "STRING"},
         {"Name": "Email", "Caption": "Электронная почта", "Type": "STRING"},
+        {"Name": "Phone", "Caption": "Телефон", "Type": "STRING"},
         {"Name": "CreatedAt", "Caption": "Дата создания", "Type": "DATETIME"},
-        {"Name": "City", "Caption": "Город", "Type": "STRING"}
+        {"Name": "City", "Caption": "Город", "Type": "STRING"},
+        {"Name": "Country", "Caption": "Страна", "Type": "STRING"}
       ]
     },
     {
@@ -20,7 +23,8 @@
         {"Name": "Name", "Caption": "Название продукта", "Type": "STRING"},
         {"Name": "Category", "Caption": "Категория", "Type": "STRING"},
         {"Name": "Price", "Caption": "Цена", "Type": "FLOAT"},
-        {"Name": "Stock", "Caption": "Количество на складе", "Type": "INTEGER"}
+        {"Name": "Stock", "Caption": "Количество на складе", "Type": "INTEGER"},
+        {"Name": "SupplierID", "Caption": "Код поставщика", "Type": "INTEGER"}
       ]
     },
     {
@@ -30,7 +34,8 @@
         {"Name": "ID", "Caption": "Код заказа", "Type": "INTEGER"},
         {"Name": "CustomerID", "Caption": "Код клиента", "Type": "INTEGER"},
         {"Name": "OrderDate", "Caption": "Дата заказа", "Type": "DATETIME"},
-        {"Name": "TotalAmount", "Caption": "Общая сумма", "Type": "FLOAT"}
+        {"Name": "TotalAmount", "Caption": "Общая сумма", "Type": "FLOAT"},
+        {"Name": "ShipperID", "Caption": "Код перевозчика", "Type": "INTEGER"}
       ]
     },
     {
@@ -40,6 +45,7 @@
         {"Name": "ID", "Caption": "Код сотрудника", "Type": "INTEGER"},
         {"Name": "FirstName", "Caption": "Имя", "Type": "STRING"},
         {"Name": "LastName", "Caption": "Фамилия", "Type": "STRING"},
+        {"Name": "Gender", "Caption": "Пол", "Type": "STRING"},
         {"Name": "Position", "Caption": "Должность", "Type": "STRING"},
         {"Name": "Salary", "Caption": "Зарплата", "Type": "FLOAT"},
         {"Name": "HireDate", "Caption": "Дата найма", "Type": "DATETIME"},
@@ -67,7 +73,9 @@
         {"Name": "Phone", "Caption": "Телефон", "Type": "STRING"},
         {"Name": "Address", "Caption": "Адрес", "Type": "STRING"},
         {"Name": "City", "Caption": "Город", "Type": "STRING"},
-        {"Name": "Country", "Caption": "Страна", "Type": "STRING"}
+        {"Name": "Country", "Caption": "Страна", "Type": "STRING"},
+        {"Name": "DateOfBirth", "Caption": "Дата рождения", "Type": "DATETIME"},
+        {"Name": "Gender", "Caption": "Пол", "Type": "STRING"}
       ]
     },
     {
@@ -77,7 +85,8 @@
         {"Name": "ID", "Caption": "Код счета", "Type": "INTEGER"},
         {"Name": "OrderID", "Caption": "Код заказа", "Type": "INTEGER"},
         {"Name": "InvoiceDate", "Caption": "Дата счета", "Type": "DATETIME"},
-        {"Name": "Amount", "Caption": "Сумма", "Type": "FLOAT"}
+        {"Name": "Amount", "Caption": "Сумма", "Type": "FLOAT"},
+        {"Name": "PaymentStatus", "Caption": "Статус оплаты", "Type": "STRING"}
       ]
     },
     {
@@ -91,7 +100,8 @@
         {"Name": "Email", "Caption": "Электронная почта", "Type": "STRING"},
         {"Name": "Address", "Caption": "Адрес", "Type": "STRING"},
         {"Name": "City", "Caption": "Город", "Type": "STRING"},
-        {"Name": "Country", "Caption": "Страна", "Type": "STRING"}
+        {"Name": "Country", "Caption": "Страна", "Type": "STRING"},
+        {"Name": "Rating", "Caption": "Рейтинг", "Type": "FLOAT"}
       ]
     },
     {
@@ -100,7 +110,28 @@
       "Columns": [
         {"Name": "ID", "Caption": "Код перевозчика", "Type": "INTEGER"},
         {"Name": "Name", "Caption": "Название", "Type": "STRING"},
-        {"Name": "Phone", "Caption": "Телефон", "Type": "STRING"}
+        {"Name": "Phone", "Caption": "Телефон", "Type": "STRING"},
+        {"Name": "Email", "Caption": "Электронная почта", "Type": "STRING"}
+      ]
+    },
+    {
+      "TableName": "Purchase",
+      "Description": "Содержит информацию о покупках",
+      "Columns": [
+        {"Name": "ID", "Caption": "Код покупки", "Type": "INTEGER"},
+        {"Name": "CustomerID", "Caption": "Код клиента", "Type": "INTEGER"},
+        {"Name": "ProductID", "Caption": "Код продукта", "Type": "INTEGER"},
+        {"Name": "PurchaseDate", "Caption": "Дата покупки", "Type": "DATETIME"},
+        {"Name": "Quantity", "Caption": "Количество", "Type": "INTEGER"},
+        {"Name": "TotalPrice", "Caption": "Общая цена", "Type": "FLOAT"}
+      ]
+    },
+    {
+      "TableName": "Gender",
+      "Description": "Содержит информацию о гендерных идентичностях",
+      "Columns": [
+        {"Name": "ID", "Caption": "Код", "Type": "INTEGER"},
+        {"Name": "GenderName", "Caption": "Название пола", "Type": "STRING"}
       ]
     }
   ]
