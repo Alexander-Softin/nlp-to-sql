@@ -1,7 +1,15 @@
 import sys
 import json
 import os
+import warnings
 from transformers import FSMTForConditionalGeneration, FSMTTokenizer, AutoTokenizer, T5ForConditionalGeneration
+import transformers
+from contextlib import redirect_stdout, redirect_stderr
+import io
+
+# Подавление предупреждений и установка уровня логирования
+warnings.filterwarnings("ignore")
+transformers.logging.set_verbosity_error()
 
 # Получение абсолютного пути к директории скрипта
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -47,20 +55,27 @@ def make_question(question, columns):
 
 if __name__ == "__main__":
     try:
-        input_text = sys.argv[1] if len(sys.argv) > 1 else ""
-        script_dir = os.path.dirname(os.path.realpath(__file__))
-        json_file_path = os.path.join(script_dir, "db.json")
+        # Перенаправление stdout и stderr в буфер
+        f = io.StringIO()
+        with redirect_stdout(f), redirect_stderr(f):
+            input_text = sys.argv[1] if len(sys.argv) > 1 else ""
+            script_dir = os.path.dirname(os.path.realpath(__file__))
+            json_file_path = os.path.join(script_dir, "db.json")
 
-        json_data = load_json_data(json_file_path)
+            json_data = load_json_data(json_file_path)
 
-        # Получение названий колонок из JSON данных
-        columns = [col['Name'] for table in json_data.get(
-            'Tables', []) for col in table.get('Columns', [])]
+            # Получение названий колонок из JSON данных
+            columns = [col['Name'] for table in json_data.get(
+                'Tables', []) for col in table.get('Columns', [])]
 
-        translated_text = translate_to_english(input_text)
-        question_with_columns = make_question(translated_text, columns)
-        sql_query = translate_to_sql(question_with_columns)
+            translated_text = translate_to_english(input_text)
+            question_with_columns = make_question(translated_text, columns)
+            sql_query = translate_to_sql(question_with_columns)
 
+        # Очистка буфера, чтобы удалить все предупреждения
+        f.close()
+
+        # Вывод окончательного SQL запроса
         print(sql_query)
     except Exception as e:
         print(f"Error: {str(e)}", file=sys.stderr)
