@@ -7,7 +7,7 @@ import transformers
 from contextlib import redirect_stdout, redirect_stderr
 import io
 
-# Подавление предупреждений и установка уровня логирования
+# Подавление предупреждений и установка уровня логировани
 warnings.filterwarnings("ignore")
 transformers.logging.set_verbosity_error()
 
