@@ -15,7 +15,7 @@ const Header: React.FC<HeaderProps> = ({ email, setIsAuthenticated }) => {
     localStorage.removeItem('email');
     setIsAuthenticated(false);
     navigate('/');
-    window.location.reload(); // Добавляем перезагрузку страницы
+    window.location.reload(); 
   };
 
   return (
