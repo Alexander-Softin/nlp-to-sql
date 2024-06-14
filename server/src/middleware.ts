@@ -38,7 +38,7 @@ export const authenticateToken = (req: Request, res: Response, next: NextFunctio
   });
 };
 
-// Миддлвэр для проверки лимита запросов
+
 export const checkRequestLimit = async (req: Request, res: Response, next: NextFunction) => {
   const { userId, isSuperUser } = req.user as JwtPayload;
   console.log('Checking request limit for user:', userId);
@@ -90,14 +90,14 @@ export const checkRequestLimit = async (req: Request, res: Response, next: NextF
 
 
 
-// Миддлвэр для проверки лимита запросов для неавторизованных пользователей
+
 export const checkUnauthenticatedRequestLimit = async (req: Request, res: Response, next: NextFunction) => {
   const clientIp = req.ip;
 
   const currentTime = new Date();
   const fiveMinutesAgo = new Date(currentTime.getTime() - 5 * 60 * 1000);
   try {
-    // Удаляем запросы старше 5 минут
+    
     await prisma.requestLog.deleteMany({
       where: {
         ip: clientIp,
@@ -105,7 +105,7 @@ export const checkUnauthenticatedRequestLimit = async (req: Request, res: Respon
       },
     });
 
-    // Считаем количество запросов за последние 5 минут
+   
     const requestLogs = await prisma.requestLog.findMany({
       where: {
         ip: clientIp,
@@ -118,7 +118,7 @@ export const checkUnauthenticatedRequestLimit = async (req: Request, res: Respon
 
     const requestCount = requestLogs.length;
 
-    // Лимит запросов для неавторизованных пользователей
+    
     const maxRequests = 1;
     if (requestCount >= maxRequests) {
       const lastRequestTime = requestLogs[0].createdAt;
