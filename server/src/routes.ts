@@ -22,7 +22,7 @@ interface JwtPayload {
   isSuperUser: boolean;
 }
 
-// Маршрут для генерации суперпользовательского ключа
+
 router.post('/generate-key', authenticateToken, async (req: Request, res: Response) => {
   const { userId } = req.user as JwtPayload;
   try {
@@ -43,16 +43,16 @@ router.post('/generate-key', authenticateToken, async (req: Request, res: Respon
 
 
 
-// Маршрут для регистрации
+
 router.post('/register', async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
-  // Проверка на допустимость почты
+ 
   if (!email.endsWith('@mail.ru')) {
     return res.status(400).json({ error: 'Email должен заканчиваться на @mail.ru' });
   }
 
-  // Хеширование пароля
+
   const hashedPassword = await bcrypt.hash(password, 10);
 
   try {
@@ -68,7 +68,7 @@ router.post('/register', async (req: Request, res: Response) => {
   }
 });
 
-// Маршрут для входа
+
 router.post('/login', async (req: Request, res: Response) => {
   const { email, password, superUserKey } = req.body;
 
@@ -183,7 +183,7 @@ async function executePythonScript(query: string): Promise<string> {
 
 
 
-// Маршрут для получения истории запросов
+
 router.get('/history', authenticateToken, async (req, res) => {
   try{const { userId } = req.user as JwtPayload;
   const requestLogs = await prisma.requestLog.findMany({
