@@ -26,7 +26,7 @@ const Login: React.FC = () => {
       localStorage.setItem('email', email);
       setIsAuthenticated(true);
       navigate('/');
-      window.location.reload(); // Добавляем перезагрузку страницы
+      window.location.reload(); 
     } else {
       setErrorMessage(data.error);
     }
