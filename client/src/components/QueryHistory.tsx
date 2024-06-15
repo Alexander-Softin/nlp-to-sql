@@ -16,7 +16,7 @@ const QueryHistory: React.FC = () => {
   useEffect(() => {
     const fetchHistory = async () => {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:3001/history', {
+      const response = await fetch('https://nlptosql.back.nikkodev.space/history', {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
@@ -32,7 +32,7 @@ const QueryHistory: React.FC = () => {
 
  const handleClearHistory = async () => {
     const token = localStorage.getItem('token');
-    const response = await fetch('http://localhost:3001/history', {
+    const response = await fetch('https://nlptosql.back.nikkodev.space/history', {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${token}`,

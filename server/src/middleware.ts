@@ -41,10 +41,8 @@ export const authenticateToken = (req: Request, res: Response, next: NextFunctio
 
 export const checkRequestLimit = async (req: Request, res: Response, next: NextFunction) => {
   const { userId, isSuperUser } = req.user as JwtPayload;
-  console.log('Checking request limit for user:', userId);
   const user = await prisma.user.findUnique({ where: { id: userId } });
   if (!user) {
-    console.log('User not found:', userId);
     return res.sendStatus(403);
   }
 
@@ -54,8 +52,6 @@ export const checkRequestLimit = async (req: Request, res: Response, next: NextF
 
   const currentTime = new Date();
   const fiveMinutesAgo = new Date(currentTime.getTime() - 5 * 60 * 1000);
-  console.log('Current time:', currentTime);
-  console.log('Five minutes ago:', fiveMinutesAgo);
 
   const requestLogs = await prisma.requestLog.findMany({
     where: {
@@ -68,7 +64,6 @@ export const checkRequestLimit = async (req: Request, res: Response, next: NextF
   });
 
   const requestCount = requestLogs.length;
-  console.log('Request count:', requestCount);
 
   const maxRequests = 3;
   if (requestCount >= maxRequests) {

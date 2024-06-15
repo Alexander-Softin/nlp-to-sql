@@ -6,7 +6,7 @@ const PurchaseKey: React.FC = () => {
 
   const handlePurchase = async () => {
     const token = localStorage.getItem('token');
-    const response = await fetch('http://localhost:3001/generate-key', {
+    const response = await fetch('https://nlptosql.back.nikkodev.space/generate-key', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${token}`,
