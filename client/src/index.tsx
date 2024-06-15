@@ -4,9 +4,11 @@ import './index.css';
 import './css/App.css';
 import App from './App';
 
+const rootElement = document.getElementById("application");
+
 ReactDOM.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,
-  document.getElementById('root')
+  rootElement
 );
