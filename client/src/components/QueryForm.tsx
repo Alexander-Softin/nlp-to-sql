@@ -26,7 +26,7 @@ const QueryForm: React.FC = () => {
         headers['Authorization'] = `Bearer ${token}`;
       }
 
-      const url = isAuthenticated ? 'http://localhost:3001/query' : 'http://localhost:3001/query-unauthed';
+      const url = isAuthenticated ? 'https://nlptosql.back.nikkodev.space/query' : 'https://nlptosql.back.nikkodev.space/query-unauthed';
       const response = await fetch(url, {
         method: 'POST',
         headers: headers,
