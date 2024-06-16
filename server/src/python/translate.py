@@ -14,8 +14,8 @@ transformers.logging.set_verbosity_error()
 # Получение абсолютного пути к директории скрипта
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
-# Модель для перевода русского текста на английский
-CKPT_translator = os.path.join(script_dir, "model/wmt19-ru-en")
+# Модель для перевода с английского на русский
+CKPT_translator = os.path.join(script_dir, "model/wmt19-en-ru")
 tokenizer_translator = FSMTTokenizer.from_pretrained(CKPT_translator)
 model_translator = FSMTForConditionalGeneration.from_pretrained(
     CKPT_translator)
