@@ -1,6 +1,6 @@
-# NLP to SQL Converter
+# NLP to SQL 
 
-This project is an intelligent system for converting natural language queries into SQL queries. It includes a web interface and a backend for handling requests and interacting with a database.
+Этот проект представляет собой интеллектуальную систему преобразования запросов на естественном языке в запросы SQL. Он включает в себя веб-интерфейс и серверную часть для обработки запросов и взаимодействия с базой данных.
 
 ## Table of Contents
 
@@ -15,15 +15,15 @@ This project is an intelligent system for converting natural language queries in
 
 ## Introduction
 
-The NLP to SQL Converter allows users to input queries in natural language and get corresponding SQL queries. This system is particularly useful for users without technical knowledge in SQL or databases, enabling them to interact with databases easily.
+Переводчик NLP в SQL позволяет пользователям вводить запросы на естественном языке и получать соответствующие запросы SQL. Эта система особенно полезна для пользователей, не имеющих технических знаний в SQL или базах данных, поскольку позволяет им легко взаимодействовать с базами данных.
 
 ## Features
 
-- Convert natural language queries to SQL.
-- User authentication and authorization.
-- Support for superusers with unlimited query capabilities.
-- Track user queries and sessions.
-- Intuitive web interface for query input and result display.
+- Преобразование запросов на естественном языке в SQL.
+- Аутентификация и авторизация пользователя.
+- Поддержка суперпользователей с неограниченными возможностями запросов.
+- Отслеживайте запросы и сеансы пользователей.
+- Интуитивно понятный веб-интерфейс для ввода запроса и отображения результатов.
 
 ## Tech Stack
 
@@ -35,9 +35,9 @@ The NLP to SQL Converter allows users to input queries in natural language and g
 
 ## Installation
 
-To set up the project locally, follow these steps:
+Чтобы настроить проект локально, выполните следующие действия:
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/Alexander-Softin/nlp-to-sql.git
+1. **Клонировать репозиторий:**
+   ``` баш
+   git-клон https://github.com/Alexander-Softin/nlp-to-sql.git
    cd nlp-to-sql
