@@ -41,3 +41,6 @@
    ``` баш
    git-клон https://github.com/Alexander-Softin/nlp-to-sql.git
    cd nlp-to-sql
+
+2. **Install dependencies:**
+   yarn install
