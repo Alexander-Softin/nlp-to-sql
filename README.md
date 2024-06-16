@@ -38,9 +38,38 @@
 Чтобы настроить проект локально, выполните следующие действия:
 
 1. **Клонировать репозиторий:**
-   ``` баш
+   ``` bash
    git-клон https://github.com/Alexander-Softin/nlp-to-sql.git
    cd nlp-to-sql
 
-2. **Install dependencies:**
+2. **Установка зависимостей:**
+   ``` bash
    yarn install
+
+3. **Set up environment variables:**
+
+   Create a .env file in the root directory with the following variables:
+   
+   ``` bash
+   DATABASE_URL=your_database_url
+   JWT_SECRET=your_jwt_secret
+
+4. **Set up the database:**
+   ``` bash
+   cd server
+   yarn prisma migrate dev
+   cd ..
+
+5. **Run the application:**
+   ``` bash
+   yarn start
+
+## Usage
+1. - **Register a new user:**
+Navigate to http://localhost:3000/register and fill in the registration form.
+
+Log in:
+Navigate to http://localhost:3000/login and log in with your credentials.
+
+Convert a query:
+On the main page, enter a natural language query and click "Generate Query" to get the corresponding SQL query.
