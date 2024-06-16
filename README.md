@@ -65,11 +65,30 @@
    yarn start
 
 ## Usage
+
 1. - **Register a new user:**
 Navigate to http://localhost:3000/register and fill in the registration form.
 
-Log in:
+
+2. - **Log in:**
 Navigate to http://localhost:3000/login and log in with your credentials.
 
-Convert a query:
+3. - **Convert a query:**
 On the main page, enter a natural language query and click "Generate Query" to get the corresponding SQL query.
+
+
+### Дополнительные замечания
+
+1. **Введение**: В этом разделе рассказывается о проекте и его целях.
+2. **Особенности**: перечислены ключевые особенности проекта.
+3. **Технический стек**: подробно описывает технологии, использованные в проекте.
+4. **Установка**: содержит пошаговые инструкции по локальной настройке проекта.
+5. **Использование**. Объясняет, как использовать приложение после его настройки.
+6. **Конечные точки API**. Описывает доступные конечные точки API и их назначение.
+7. **Вклад**: объясняет, как внести свой вклад в проект.
+8. **Лицензия**: указывает информацию о лицензии.
+
+
+
+
+
