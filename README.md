@@ -62,19 +62,18 @@
 
 5. **Запустите приложение:**
    ``` bash
-   начало пряжи
+   yarn start
 
-## Usage
+## Применение
 
-1. - **Register a new user:**
-Navigate to http://localhost:3000/register and fill in the registration form.
+1. - **Зарегистрируйте нового пользователя:**
+Перейдите по адресу http://localhost:3000/register и заполните регистрационную форму.
 
+2. - **Войти:**
+Перейдите по адресу http://localhost:3000/login и войдите в систему, используя свои учетные данные.
 
-2. - **Log in:**
-Navigate to http://localhost:3000/login and log in with your credentials.
-
-3. - **Convert a query:**
-On the main page, enter a natural language query and click "Generate Query" to get the corresponding SQL query.
+3. – **Преобразование запроса:**
+На главной странице введите запрос на естественном языке и нажмите «Создать запрос», чтобы получить соответствующий SQL-запрос.
 
 
 ### Дополнительные замечания
