@@ -20,7 +20,7 @@ tokenizer_translator = FSMTTokenizer.from_pretrained(CKPT_translator)
 model_translator = FSMTForConditionalGeneration.from_pretrained(
     CKPT_translator)
 
-# Модель для перевода текста на английском в SQL
+# Модель для перевода текста на русском в  SQL
 CKPT = os.path.join(script_dir, "model/T5-LM-Large-text2sql-spider")
 tokenizer_sql = AutoTokenizer.from_pretrained(CKPT)
 model_sql = T5ForConditionalGeneration.from_pretrained(CKPT)
