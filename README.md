@@ -46,23 +46,23 @@
    ``` bash
    yarn install
 
-3. **Set up environment variables:**
+3. **Настройте переменные среды:**
 
-   Create a .env file in the root directory with the following variables:
+   Создайте файл .env в корневом каталоге со следующими переменными:
    
    ``` bash
-   DATABASE_URL=your_database_url
-   JWT_SECRET=your_jwt_secret
+   DATABASE_URL=url_вашей_базы_данных
+   JWT_SECRET=ваш_jwt_secret
 
-4. **Set up the database:**
+4. **Настройте базу данных:**
    ``` bash
-   cd server
-   yarn prisma migrate dev
-   cd ..
+   CD-сервер
+   пряжа Prisma Migrate Dev
+   CD ..
 
-5. **Run the application:**
+5. **Запустите приложение:**
    ``` bash
-   yarn start
+   начало пряжи
 
 ## Usage
 
